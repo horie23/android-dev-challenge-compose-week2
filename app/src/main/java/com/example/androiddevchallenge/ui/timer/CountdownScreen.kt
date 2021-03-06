@@ -16,6 +16,8 @@
 package com.example.androiddevchallenge.ui.timer
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
 import androidx.compose.material.Text
@@ -24,7 +26,10 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import org.intellij.lang.annotations.JdkConstants
 
@@ -33,7 +38,7 @@ fun CountdownScreen(viewModel: CountdownTimerViewModel = viewModel()) {
     val time: Long by viewModel.countdownTime.observeAsState(initial = 0L)
     val isCountingDown: Boolean by viewModel.isCountingDown.observeAsState(initial = false)
 
-    Column {
+    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
         Countdown(time = time)
         CountdownSetting(isCountingDown = isCountingDown, onClick = { time ->
             if (isCountingDown) viewModel.stopCountdown() else viewModel.startCountdown(time)
@@ -43,7 +48,7 @@ fun CountdownScreen(viewModel: CountdownTimerViewModel = viewModel()) {
 
 @Composable
 fun CountdownSetting(isCountingDown: Boolean, onClick: (Long) -> Unit) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
         var seconds by remember { mutableStateOf("60") }
         TextField(
             value = seconds,
@@ -63,5 +68,10 @@ fun CountdownSetting(isCountingDown: Boolean, onClick: (Long) -> Unit) {
 
 @Composable
 fun Countdown(time: Long) {
-    Text(text = time.toString())
+    Text(
+        text = time.toString(),
+        fontSize = 48.sp,
+        textAlign = TextAlign.Center,
+        modifier = Modifier.padding(48.dp)
+    )
 }
