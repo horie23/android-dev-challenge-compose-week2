@@ -56,8 +56,13 @@ fun CountdownScreen(viewModel: CountdownTimerViewModel = viewModel()) {
         CountdownSetting(
             isCountingDown = isCountingDown,
             onClick = { time ->
-                if (isCountingDown) viewModel.stopCountdown() else viewModel.startCountdown(time)
-            })
+                if (isCountingDown) {
+                    viewModel.stopCountdown()
+                } else {
+                    viewModel.startCountdown(time)
+                }
+            }
+        )
         if (time > 0) {
             Countdown(time = time)
         }
@@ -128,5 +133,6 @@ fun CountdownCircle() {
                 size = Size(innerRadius * 2, innerRadius * 2),
                 style = stroke,
             )
-        })
+        }
+    )
 }
