@@ -53,9 +53,11 @@ fun CountdownScreen(viewModel: CountdownTimerViewModel = viewModel()) {
     val time: Long by viewModel.countdownTime.observeAsState(initial = 0L)
     val isCountingDown: Boolean by viewModel.isCountingDown.observeAsState(initial = false)
     Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxWidth()) {
-        CountdownSetting(isCountingDown = isCountingDown, onClick = { time ->
-            if (isCountingDown) viewModel.stopCountdown() else viewModel.startCountdown(time)
-        })
+        CountdownSetting(
+            isCountingDown = isCountingDown,
+            onClick = { time ->
+                if (isCountingDown) viewModel.stopCountdown() else viewModel.startCountdown(time)
+            })
         if (time > 0) {
             Countdown(time = time)
         }
